@@ -58,7 +58,7 @@ class Inventory(Entity):
             name=item,
             parent=self,
             model='quad',
-            texture='items/'+item,
+            texture='assets/items/'+item,
             color=color.white,
             scale_x=1/self.texture_scale[0],
             scale_y=1/self.texture_scale[1],
