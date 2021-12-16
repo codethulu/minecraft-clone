@@ -4,6 +4,9 @@ from ursina.color import rgba
 from ursina.prefabs.first_person_controller \
     import FirstPersonController
 import random
+from ursina.shaders import basic_lighting_shader
+from ursina.shaders import colored_lights_shader
+
 
 from ursina.scripts.colorize import colorize
 defaultpath = "assets/blocks/"
@@ -23,6 +26,7 @@ class Block(Button):
         self.position = pos
         self.hardness = 5
         self.highlight_color = color.white
+        shader = colored_lights_shader
 
     def destroy(self):
         self.hardness -= 1
@@ -47,10 +51,130 @@ class grass(Block):
         self.hardness = 1
 
 
-class log(Block):
+class dirt(Block):
+    def __init__(self, pos, var):
+        super().__init__(pos)
+        self.name = "dirt"
+        self.texture = load_texture(defaultpath + self.name + '-' + str(var))
+        self.hardness = 1
+
+
+class mud(Block):
     def __init__(self, pos):
         super().__init__(pos)
+        self.name = "mud"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class mudBrick(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "mud-brick"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class sand(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "sand"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class stone(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "stone"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class stoneBrick(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "stone-brick"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class stoneTiles(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "stone-tiles"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class terracotta(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "terracotta"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class brick(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "brick"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class terracottaTiles(Block):
+    def __init__(self, pos,var):
+        super().__init__(pos)
+        self.name = "terracotta-tiles"
+        self.texture = load_texture(defaultpath + self.name + '-' + str(var))
+        self.hardness = 1
+
+
+class concrete(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "concrete"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class concreteBrick(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "concrete-brick"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class concretePillar(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "concrete-pillar"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class log(Block):
+    def __init__(self, pos,var):
+        super().__init__(pos)
         self.name = "log"
+        self.texture = load_texture(defaultpath + self.name + '-' + str(var))
+        self.hardness = 1
+
+
+class wood(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "wood"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class ash(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "ash"
         self.texture = load_texture(defaultpath + self.name)
         self.hardness = 1
 

@@ -7,6 +7,14 @@ import random
 import time
 
 
+class InventoryItem(Draggable):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def on_click(self):
+        Inventory.selectedItem = self.name
+
+
 class Inventory(Entity):
     def __init__(self, **kwargs):
         super().__init__(
@@ -19,7 +27,8 @@ class Inventory(Entity):
             position=(-.4, .5),
             color=color.color(0, 0, .1, .9),
             visible=False,
-            lifeMagic=False
+            lifeMagic=False,
+            selectedItem=None
 
         )
 
@@ -54,7 +63,7 @@ class Inventory(Entity):
 
         x, y = self.find_free_spot()
 
-        icon = Draggable(
+        icon = InventoryItem(
             name=item,
             parent=self,
             model='quad',
@@ -65,7 +74,7 @@ class Inventory(Entity):
             origin=(-.5, .5),
             x=x * 1/self.texture_scale[0],
             y=-y * 1/self.texture_scale[1],
-            z=-.5,
+            z=-.5
         )
         name = item.replace('_', ' ').title()
         if type == "tool":
@@ -129,6 +138,8 @@ class Inventory(Entity):
                                 self.append("glass")
                             if c.name == "clay":
                                 self.append("terracotta")
+                            if c.name == "mud":
+                                self.append("mud-brick")
                             if c.name == "water":
                                 self.append("special", type="magic")
                         if icon.name == "water":
