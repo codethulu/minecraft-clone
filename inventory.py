@@ -87,11 +87,14 @@ class Inventory(Entity):
         )
         name = item.replace('_', ' ').title()
         if type == "tool":
-            icon.tooltip = Tooltip('<orange>[Tool] ' + name, font="assets/DTM-Sans.otf")
+            icon.tooltip = Tooltip(name+'\n<orange> -> TOOL', font="assets/DTM-Sans.otf")
         elif type == "magic":
-            icon.tooltip = Tooltip('<blue>[Magic] ' + name, font="assets/DTM-Sans.otf")
+            icon.tooltip = Tooltip(name+'\n<blue> -> MAGIC', font="assets/DTM-Sans.otf")
         else:
-            icon.tooltip = Tooltip(name+'\n<gray> -> '+combination, font="assets/DTM-Sans.otf")
+            if combination=="element":
+                icon.tooltip = Tooltip(name+'\n<green> -> '+combination, font="assets/DTM-Sans.otf")
+            else:
+                icon.tooltip = Tooltip(name+'\n<gray> -> '+combination, font="assets/DTM-Sans.otf")
 
         # if random.random() < .25:
         #     icon.color = color.gold
