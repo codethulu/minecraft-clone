@@ -21,6 +21,8 @@ def convert(name, position):
         return blocks.glass(position)
     if name == "sand":
         return blocks.sand(position)
+    if name == "clay":
+        return blocks.clay(position)
     if name == "stone":
         return blocks.stone(position)
     if name == "stone-brick":

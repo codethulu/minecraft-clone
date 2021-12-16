@@ -82,7 +82,12 @@ class sand(Block):
         self.texture = load_texture(defaultpath + self.name)
         self.hardness = 1
 
-
+class clay(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "clay"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
 class stone(Block):
     def __init__(self, pos):
         super().__init__(pos)

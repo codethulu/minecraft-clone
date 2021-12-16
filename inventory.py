@@ -20,17 +20,19 @@ class Inventory(Entity):
         super().__init__(
             parent=camera.ui,
             model=Quad(radius=.015),
-            texture='white_cube',
+            texture='assets/item-square',
             texture_scale=(8, 8),
             scale=(.8, .8),
             origin=(-.5, .5),
-            position=(-.4, .5),
+            position=(-.4, .4),
             color=color.color(0, 0, .1, .9),
             visible=False,
             lifeMagic=False,
-            selectedItem=None
-
+            selectedItem=None,
+            itemsUnlockedLabel =Text("10/64", origin=(-6,17.7), background=True, visible=False)
+            
         )
+        
 
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -42,6 +44,8 @@ class Inventory(Entity):
         self.visible = not self.visible
         window.exit_button.visible = self.visible
         mouse.locked = not self.visible
+        self.itemsUnlockedLabel.text = str(len(self.children))+"/64"
+        self.itemsUnlockedLabel.visible= self.visible
         time.sleep(0.1)
 
     def find_free_spot(self):
@@ -54,6 +58,7 @@ class Inventory(Entity):
                     return x, y
 
     def append(self, item, x=0, y=0, type="item"):
+        
         unique=True
         for i in self.children:
             if i.name == item:
@@ -162,3 +167,4 @@ class Inventory(Entity):
         if len(self.children) > 16 and self.lifeMagic == False:
             self.lifeMagic = True
             self.append("life", type="magic")
+        self.itemsUnlockedLabel.text = str(len(self.children))+"/64"
