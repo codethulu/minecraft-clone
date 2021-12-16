@@ -15,6 +15,8 @@ def convert(name, position):
         return blocks.log(position, random.randint(0, 1))
     if name == "wood":
         return blocks.wood(position)
+    if name == "leaves":
+        return blocks.leaves(position)
     if name == "ash":
         return blocks.ash(position)
     if name == "glass":
@@ -24,9 +26,13 @@ def convert(name, position):
     if name == "clay":
         return blocks.clay(position)
     if name == "stone":
-        return blocks.stone(position)
+        return blocks.stone(position,0)
     if name == "stone-brick":
-        return blocks.stoneBrick(position)
+        return blocks.stoneBrick(position,0)
+    if name == "mossy-stone":
+        return blocks.stone(position,1)
+    if name == "mossy-stone-brick":
+        return blocks.stoneBrick(position,1)
     if name == "stone-tiles":
         return blocks.stoneTiles(position)
     if name == "concrete":

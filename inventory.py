@@ -29,7 +29,7 @@ class Inventory(Entity):
             visible=False,
             lifeMagic=False,
             selectedItem=None,
-            itemsUnlockedLabel =Text("10/64", origin=(-6,17.7), background=True, visible=False)
+            itemsUnlockedLabel =Text("10/64", origin=(-6,17.7), background=True, visible=False, font="assets/DTM-Sans.otf")
             
         )
         
@@ -57,7 +57,7 @@ class Inventory(Entity):
                 if not (x, -y) in grid_positions:
                     return x, y
 
-    def append(self, item, x=0, y=0, type="item"):
+    def append(self, item, x=0, y=0, type="item", combination="element"):
         
         unique=True
         for i in self.children:
@@ -87,11 +87,11 @@ class Inventory(Entity):
         )
         name = item.replace('_', ' ').title()
         if type == "tool":
-            icon.tooltip = Tooltip('<orange>[Tool] ' + name)
+            icon.tooltip = Tooltip('<orange>[Tool] ' + name, font="assets/DTM-Sans.otf")
         elif type == "magic":
-            icon.tooltip = Tooltip('<blue>[Magic] ' + name)
+            icon.tooltip = Tooltip('<blue>[Magic] ' + name, font="assets/DTM-Sans.otf")
         else:
-            icon.tooltip = Tooltip(name)
+            icon.tooltip = Tooltip(name+'\n<gray> -> '+combination, font="assets/DTM-Sans.otf")
 
         # if random.random() < .25:
         #     icon.color = color.gold
@@ -120,47 +120,55 @@ class Inventory(Entity):
 
                     c.position = icon.org_pos
                     if type == "tool":
+                        icon.name+"+"+c.name
                         if icon.name == "chisel":
                             if c.name == "concrete":
-                                self.append("concrete-pillar")
+                                self.append("concrete-pillar",combination = icon.name+"+"+c.name)
                             if c.name == "stone":
-                                self.append("stone-tiles")
+                                self.append("stone-tiles",combination = icon.name+"+"+c.name)
                             if c.name == "terracotta":
-                                self.append("terracotta-tiles")
+                                self.append("terracotta-tiles",combination = icon.name+"+"+c.name)
                         if icon.name == "hammer":
                             if c.name == "stone":
-                                self.append("sand")
+                                self.append("sand",combination = icon.name+"+"+c.name)
                         if icon.name == "saw":
                             if c.name == "log":
-                                self.append("wood")
+                                self.append("wood",combination = icon.name+"+"+c.name)
                             if c.name == "stone":
-                                self.append("stone-brick")
+                                self.append("stone-brick",combination = icon.name+"+"+c.name)
                             if c.name == "terracotta":
-                                self.append("brick")
+                                self.append("brick",combination = icon.name+"+"+c.name)
                             if c.name == "concrete":
-                                self.append("concrete-brick")
+                                self.append("concrete-brick",combination = icon.name+"+"+c.name)
                     if type == "magic":
                         if icon.name == "fire":
                             if c.name == "log" or c.name == "wood":
-                                self.append("ash")
+                                self.append("ash",combination = icon.name+"+"+c.name)
                             if c.name == "sand":
-                                self.append("glass")
+                                self.append("glass",combination = icon.name+"+"+c.name)
                             if c.name == "clay":
-                                self.append("terracotta")
+                                self.append("terracotta",combination = icon.name+"+"+c.name)
                             if c.name == "mud":
-                                self.append("mud-brick")
+                                self.append("mud-brick",combination = icon.name+"+"+c.name)
                             if c.name == "water":
                                 self.append("special", type="magic")
                         if icon.name == "water":
                             if c.name == "dirt":
-                                self.append("mud")
+                                self.append("mud",combination = icon.name+"+"+c.name)
                             if c.name == "sand":
-                                self.append("clay")
+                                self.append("clay",combination = icon.name+"+"+c.name)
                             if c.name == "fire":
-                                self.append("special", type="magic")
+                                self.append("special", type="magic",combination = icon.name+"+"+c.name)
                         if icon.name == "life":
                             if c.name == "dirt":
-                                self.append("grass")
+                                self.append("grass",combination = icon.name+"+"+c.name)
+                            if c.name == "log":
+                                self.append("leaves",combination = icon.name+"+"+c.name)
+                            if c.name == "stone":
+                                self.append("mossy-stone",combination = icon.name+"+"+c.name)
+                            if c.name == "stone-brick":
+                                self.append("mossy-stone-brick",combination = icon.name+"+"+c.name)
+
 
         icon.drag = drag
         icon.drop = drop

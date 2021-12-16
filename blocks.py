@@ -89,18 +89,18 @@ class clay(Block):
         self.texture = load_texture(defaultpath + self.name)
         self.hardness = 1
 class stone(Block):
-    def __init__(self, pos):
+    def __init__(self, pos,var):
         super().__init__(pos)
         self.name = "stone"
-        self.texture = load_texture(defaultpath + self.name)
+        self.texture = load_texture(defaultpath + self.name + '-' + str(var))
         self.hardness = 1
 
 
 class stoneBrick(Block):
-    def __init__(self, pos):
+    def __init__(self, pos,var):
         super().__init__(pos)
         self.name = "stone-brick"
-        self.texture = load_texture(defaultpath + self.name)
+        self.texture = load_texture(defaultpath + self.name + '-' + str(var))
         self.hardness = 1
 
 
@@ -165,6 +165,15 @@ class log(Block):
         super().__init__(pos)
         self.name = "log"
         self.texture = load_texture(defaultpath + self.name + '-' + str(var))
+        self.hardness = 1
+
+class leaves(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        # self.Branches = Block(texture=load_texture(defaultpath + "branches"), scale=(0.6,0.6,0.6))
+
+        self.name = "leaves"
+        self.texture = load_texture(defaultpath + self.name)
         self.hardness = 1
 
 
