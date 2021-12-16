@@ -54,6 +54,10 @@ class Inventory(Entity):
                     return x, y
 
     def append(self, item, x=0, y=0, type="item"):
+        unique=True
+        for i in self.children:
+            if i.name == item:
+                return
 
         if len(self.children) >= 8*8:
             error_message = Text('<red>Inventory is full!',
