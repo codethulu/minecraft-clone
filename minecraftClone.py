@@ -19,12 +19,12 @@ scene.fog_density=.01
 scene.fog_color = color.rgb(50,50,50)
 player = FirstPersonController()
 player.gravity= 0.7
-player.speed=6
 player.jump_height=1.3
 player.jump_duration=.3
 window.borderless = False
 window.exit_button.visible = False
 window.fps_counter.enabled = False
+
 
 # DirectionalLight(parent=pivot, x=2, y=30, z=3, shadows=True)
 # window.fullscreen = True
@@ -67,6 +67,8 @@ inventory.append('dirt')
 inventory.append('log')
 # inventory.append('wood')
 inventory.append('stone')
+inventory.append('sand')
+inventory.append('marble')
 
 
 # inventory.append('coal')
@@ -74,11 +76,6 @@ inventory.append('stone')
 # inventory.append('gold')
 # inventory.append('diamond')
 
-
-# inventory.append('sand')
-# inventory.append('glass')
-# inventory.append('brick')
-# inventory.append('stone-brick')
 
 
 inventory.append('concrete')
@@ -88,14 +85,37 @@ boxes = []
 
 
 def update():
+    hovered_block = None
+    for block in boxes:
+        block.update()
+        if block.hovered:
+            hovered_block=block
+            
+    if held_keys[ 'left shift']:
+        player.speed = 9
+    else:
+        player.speed = 5
+    
 
     if held_keys['left mouse']:
         selected.position = (0.4, -0.1)
         arm.position = (0.6, -0.5)
+        if hovered_block!=None:
+            hovered_block.destroy()
+            if hovered_block.hardness < 1:
+                boxes.remove(hovered_block)
+                destroy(hovered_block)
+                time.sleep(0.1)
+        
+
 
     elif held_keys['right mouse']:
         selected.position = (0.4, -0.1)
         arm.position = (0.6, -0.5)
+        if hovered_block!=None:
+            boxes.append(itemblockconverter.convert(
+                    selecteditem, (hovered_block.position + mouse.normal)))
+            time.sleep(0.1)
 
     elif held_keys['escape']:
         inventory.toggleVisible()
@@ -124,21 +144,22 @@ def input(key):
                 if item.hovered:
                     global selecteditem
                     selecteditem = item.name
-        else:
-            for box in boxes:
-                if box.hovered:
-                    box.destroy()
-                    if box.hardness < 1:
-                        boxes.remove(box)
-                        destroy(box)
+  
+            # for box in boxes:
+            #     if box.hovered:
+            #         box.destroy()
+            #         if box.hardness < 1:
+            #             boxes.remove(box)
+            #             destroy(box)
 
-    if key == 'right mouse down':
-        for box in boxes:
-            if box.hovered:
-                boxes.append(itemblockconverter.convert(
-                    selecteditem, (box.position + mouse.normal)))
+    # if key == 'right mouse down':
+    #     for box in boxes:
+    #         if box.hovered:
+    #             boxes.append(itemblockconverter.convert(
+    #                 selecteditem, (box.position + mouse.normal)))
                 # boxes.append(blocks.iron(
                 #     (box.position + mouse.normal)))
+    
 
 
 app.run()

@@ -31,6 +31,9 @@ class Block(Button):
     def destroy(self):
         self.hardness -= 1
 
+    def update(self):
+        return
+
 
 class bedrock(Block):
     def __init__(self, pos):
@@ -95,7 +98,42 @@ class stone(Block):
         self.texture = load_texture(defaultpath + self.name + '-' + str(var))
         self.hardness = 1
 
+class magma(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.var = 0
+        self.name = "magma"
+        self.texture = load_texture(defaultpath + self.name + '-' + str(self.var))
+        self.hardness = 1
+        self.animationConstant = 50
+    def update(self):
+        if self.animationConstant==0:
+            self.animationConstant=50
+            self.var+=1
+            if self.var>9:
+                self.var = 0
+            self.texture = load_texture(defaultpath + self.name + '-' + str(self.var))
+        else:
+            self.animationConstant-=1
 
+class obsidian(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "obsidian"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+class obsidianBrick(Block):
+    def __init__(self, pos,var):
+        super().__init__(pos)
+        self.name = "obsidian-brick"
+        self.texture = load_texture(defaultpath + self.name + '-' + str(var))
+        self.hardness = 1
+class gravel(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "gravel"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
 class stoneBrick(Block):
     def __init__(self, pos,var):
         super().__init__(pos)
@@ -159,6 +197,51 @@ class concretePillar(Block):
         self.texture = load_texture(defaultpath + self.name)
         self.hardness = 1
 
+class sandstone(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "sandstone"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class sandstoneBrick(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "sandstone-brick"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class sandstonePillar(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "sandstone-pillar"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+class marble(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "marble"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class marbleBrick(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "marble-brick"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class marblePillar(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "marble-pillar"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
 
 class log(Block):
     def __init__(self, pos,var):

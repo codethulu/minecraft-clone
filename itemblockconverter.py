@@ -5,6 +5,8 @@ import random
 def convert(name, position):
     if name == "grass":
         return blocks.grass(position, 0)
+    if name == "meadow":
+        return blocks.grass(position, random.randint(1, 2))
     if name == "dirt":
         return blocks.dirt(position, random.randint(0, 3))
     if name == "mud":
@@ -27,6 +29,14 @@ def convert(name, position):
         return blocks.clay(position)
     if name == "stone":
         return blocks.stone(position,0)
+    if name == "magma":
+        return blocks.magma(position)
+    if name == "obsidian":
+        return blocks.obsidian(position)
+    if name == "obsidian-brick":
+        return blocks.obsidianBrick(position,random.randint(0,3))
+    if name == "gravel":
+        return blocks.gravel(position)
     if name == "stone-brick":
         return blocks.stoneBrick(position,0)
     if name == "mossy-stone":
@@ -41,6 +51,18 @@ def convert(name, position):
         return blocks.concreteBrick(position)
     if name == "concrete-pillar":
         return blocks.concretePillar(position)
+    if name == "marble":
+        return blocks.marble(position)
+    if name == "marble-brick":
+        return blocks.marbleBrick(position)
+    if name == "marble-pillar":
+        return blocks.marblePillar(position)
+    if name == "sandstone":
+        return blocks.sandstone(position)
+    if name == "sandstone-brick":
+        return blocks.sandstoneBrick(position)
+    if name == "sandstone-pillar":
+        return blocks.sandstonePillar(position)
     if name == "terracotta":
         return blocks.terracotta(position)
     if name == "brick":
