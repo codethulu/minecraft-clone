@@ -22,14 +22,17 @@ class Inventory(Entity):
             model=Quad(radius=.015),
             texture='assets/item-square',
             texture_scale=(8, 8),
-            scale=(0.8, 0.8),
+            scale=(0.7, 0.7),
             origin=(-.5, .5),
             position=(-.75, .4),
-            color=color.color(0, 0, .1, .9),
+            color=color.color(0, 0, .3, .9),
             visible=False,
             lifeMagic=False,
             selectedItem=None,
-            itemsUnlockedLabel =Text("10/64", origin=(-6,17.7), background=True, visible=False, font="assets/DTM-Sans.otf")
+            unlocks=[[16, "life","magic"],[25, "concrete","item"], [28, "marble","item"], [32, "basalt","item"], [50, "life","item"]],
+            inventoryLabel =Text("Inventory", position=(-0.73,.47), background=True, visible=False, font="assets/DTM-Sans.otf"),
+            nextUnlockLabel =Text("0 Till Next Unlock:", position=(-0.73,-.34), background=True, visible=False, font="assets/DTM-Sans.otf"),
+            itemsUnlockedLabel =Text("10/64", position=(-0.15,-.34), background=True, visible=False, font="assets/DTM-Sans.otf")
             
         )
         
@@ -46,6 +49,9 @@ class Inventory(Entity):
         mouse.locked = not self.visible
         self.itemsUnlockedLabel.text = str(len(self.children))+"/64"
         self.itemsUnlockedLabel.visible= self.visible
+        self.inventoryLabel.visible= self.visible
+        self.nextUnlockLabel.visible= self.visible
+        self.nextUnlockLabel.text = str(self.unlocks[0][0] - len(self.children))+" Till Next Unlock:"
         time.sleep(0.1)
 
     def find_free_spot(self):
@@ -118,10 +124,8 @@ class Inventory(Entity):
                     continue
 
                 if c.x == icon.x and c.y == icon.y:
-
-                    c.position = icon.org_pos
                     if type == "tool":
-                        icon.name+"+"+c.name
+                        icon.position = icon.org_pos
                         if icon.name == "chisel":
                             if c.name == "concrete":
                                 self.append("concrete-pillar",combination = icon.name+"+"+c.name)
@@ -133,6 +137,8 @@ class Inventory(Entity):
                                 self.append("stone-tiles",combination = icon.name+"+"+c.name)
                             if c.name == "terracotta":
                                 self.append("terracotta-tiles",combination = icon.name+"+"+c.name)
+                            if c.name == "basalt":
+                                self.append("basalt-tiles",combination = icon.name+"+"+c.name)
                         if icon.name == "hammer":
                             if c.name == "stone":
                                 self.append("gravel",combination = icon.name+"+"+c.name)
@@ -153,10 +159,23 @@ class Inventory(Entity):
                                 self.append("sandstone-brick",combination = icon.name+"+"+c.name)
                             if c.name == "marble":
                                 self.append("marble-brick",combination = icon.name+"+"+c.name)
-                    if type == "magic":
+                            if c.name == "basalt":
+                                self.append("basalt-brick",combination = icon.name+"+"+c.name)
+                            if c.name == "iron":
+                                self.append("iron-plating",combination = icon.name+"+"+c.name)
+                        if icon.name == "pickaxe":
+                            if c.name == "stone":
+                                self.append("iron",combination = icon.name+"+"+c.name)
+                            if c.name == "sandstone":
+                                self.append("amber",combination = icon.name+"+"+c.name)
+                            if c.name == "marble":
+                                self.append("amethyst",combination = icon.name+"+"+c.name)
+                        
+                    elif type == "magic":
+                        icon.position = icon.org_pos
                         if icon.name == "fire":
-                            if c.name == "log" or c.name == "wood":
-                                self.append("ash",combination = icon.name+"+"+c.name)
+                            # if c.name == "log" or c.name == "wood":
+                            #     self.append("ash",combination = icon.name+"+"+c.name)
                             if c.name == "stone":
                                 self.append("magma",combination = icon.name+"+"+c.name)
                             if c.name == "sand":
@@ -188,11 +207,19 @@ class Inventory(Entity):
                         if icon.name == "special":
                             if c.name == "grass":
                                 self.append("meadow",combination = icon.name+"+"+c.name)
+
+                    else:
+                        c.position = icon.org_pos
                            
 
         icon.drag = drag
         icon.drop = drop
-        if len(self.children) > 16 and self.lifeMagic == False:
-            self.lifeMagic = True
-            self.append("life", type="magic")
+
+        
+
+        if len(self.children) == self.unlocks[0][0]:
+            self.append(self.unlocks[0][1], type=self.unlocks[0][2])
+            self.unlocks.pop(0)
+        
+        self.nextUnlockLabel.text = str(self.unlocks[0][0] - len(self.children))+" Till Next Unlock:"
         self.itemsUnlockedLabel.text = str(len(self.children))+"/64"

@@ -68,7 +68,6 @@ inventory.append('log')
 # inventory.append('wood')
 inventory.append('stone')
 inventory.append('sand')
-inventory.append('marble')
 
 
 # inventory.append('coal')
@@ -78,7 +77,6 @@ inventory.append('marble')
 
 
 
-inventory.append('concrete')
 
 
 boxes = []
@@ -96,28 +94,28 @@ def update():
     else:
         player.speed = 5
     
+    if not inventory.visible:
+        if held_keys['left mouse']:
+            selected.position = (0.4, -0.1)
+            arm.position = (0.6, -0.5)
+            if hovered_block!=None:
+                hovered_block.destroy()
+                if hovered_block.hardness < 1:
+                    boxes.remove(hovered_block)
+                    destroy(hovered_block)
+                    time.sleep(0.1)
+            
 
-    if held_keys['left mouse']:
-        selected.position = (0.4, -0.1)
-        arm.position = (0.6, -0.5)
-        if hovered_block!=None:
-            hovered_block.destroy()
-            if hovered_block.hardness < 1:
-                boxes.remove(hovered_block)
-                destroy(hovered_block)
+
+        elif held_keys['right mouse']:
+            selected.position = (0.4, -0.1)
+            arm.position = (0.6, -0.5)
+            if hovered_block!=None:
+                boxes.append(itemblockconverter.convert(
+                        selecteditem, (hovered_block.position + mouse.normal)))
                 time.sleep(0.1)
-        
 
-
-    elif held_keys['right mouse']:
-        selected.position = (0.4, -0.1)
-        arm.position = (0.6, -0.5)
-        if hovered_block!=None:
-            boxes.append(itemblockconverter.convert(
-                    selecteditem, (hovered_block.position + mouse.normal)))
-            time.sleep(0.1)
-
-    elif held_keys['escape']:
+    if held_keys['escape']:
         inventory.toggleVisible()
 
         if selecteditem == None:

@@ -31,6 +31,10 @@ def convert(name, position):
         return blocks.stone(position,0)
     if name == "magma":
         return blocks.magma(position)
+    if name == "amber":
+        return blocks.amber(position)
+    if name == "amethyst":
+        return blocks.amethyst(position)
     if name == "obsidian":
         return blocks.obsidian(position)
     if name == "obsidian-brick":
@@ -63,6 +67,12 @@ def convert(name, position):
         return blocks.sandstoneBrick(position)
     if name == "sandstone-pillar":
         return blocks.sandstonePillar(position)
+    if name == "basalt":
+        return blocks.basalt(position)
+    if name == "basalt-brick":
+        return blocks.basaltBrick(position)
+    if name == "basalt-tiles":
+        return blocks.basaltTiles(position)
     if name == "terracotta":
         return blocks.terracotta(position)
     if name == "brick":
@@ -72,3 +82,10 @@ def convert(name, position):
 
     if name == "concrete":
         return blocks.concrete(position)
+
+    if name == "iron":
+        return blocks.iron(position)
+    if name == "iron-plating":
+        return blocks.ironPlating(position, random.randint(0, 4))
+    if name == "water":
+        return blocks.water(position)
