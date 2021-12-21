@@ -32,7 +32,17 @@ class Inventory(Entity):
             unlocks=[[16, "life","magic"],[25, "concrete","item"], [28, "marble","item"], [32, "basalt","item"], [50, "life","item"]],
             inventoryLabel =Text("Inventory", position=(-0.73,.47), background=True, visible=False, font="assets/DTM-Sans.otf"),
             nextUnlockLabel =Text("0 Till Next Unlock:", position=(-0.73,-.34), background=True, visible=False, font="assets/DTM-Sans.otf"),
-            itemsUnlockedLabel =Text("10/64", position=(-0.15,-.34), background=True, visible=False, font="assets/DTM-Sans.otf")
+            itemsUnlockedLabel =Text("10/64", position=(-0.15,-.34), background=True, visible=False, font="assets/DTM-Sans.otf"),
+            nextUnlockIcon = Button(
+                parent=self,
+                model='quad',
+                color=color.gray,
+                scale_x=1/12,
+                scale_y=1/12,
+                position=(-0.445,-.35),
+                visible = False,
+                highlight_color = color.gray
+            ),
             
         )
         
@@ -52,6 +62,8 @@ class Inventory(Entity):
         self.inventoryLabel.visible= self.visible
         self.nextUnlockLabel.visible= self.visible
         self.nextUnlockLabel.text = str(self.unlocks[0][0] - len(self.children))+" Till Next Unlock:"
+        self.nextUnlockIcon.visible= self.visible
+        self.nextUnlockIcon.texture = texture='assets/items/'+self.unlocks[0][1]
         time.sleep(0.1)
 
     def find_free_spot(self):
@@ -166,9 +178,9 @@ class Inventory(Entity):
                         if icon.name == "pickaxe":
                             if c.name == "stone":
                                 self.append("iron",combination = icon.name+"+"+c.name)
-                            if c.name == "sandstone":
+                            if c.name == "basalt":
                                 self.append("amber",combination = icon.name+"+"+c.name)
-                            if c.name == "marble":
+                            if c.name == "sandstone":
                                 self.append("amethyst",combination = icon.name+"+"+c.name)
                         
                     elif type == "magic":
@@ -222,4 +234,5 @@ class Inventory(Entity):
             self.unlocks.pop(0)
         
         self.nextUnlockLabel.text = str(self.unlocks[0][0] - len(self.children))+" Till Next Unlock:"
+        self.nextUnlockIcon.texture = texture='assets/items/'+self.unlocks[0][1]
         self.itemsUnlockedLabel.text = str(len(self.children))+"/64"
