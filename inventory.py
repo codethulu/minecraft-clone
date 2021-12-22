@@ -29,7 +29,7 @@ class Inventory(Entity):
             visible=False,
             lifeMagic=False,
             selectedItem=None,
-            unlocks=[[16, "life","magic"],[25, "concrete","item"], [28, "marble","item"], [32, "basalt","item"], [50, "life","item"]],
+            unlocks=[[16, "life","magic"],[25, "concrete","item"], [28, "marble","item"], [32, "basalt","item"],[48, "ruby","item"],[63, "life","item"]],
             inventoryLabel =Text("Inventory", position=(-0.73,.47), background=True, visible=False, font="assets/DTM-Sans.otf"),
             nextUnlockLabel =Text("0 Till Next Unlock:", position=(-0.73,-.34), background=True, visible=False, font="assets/DTM-Sans.otf"),
             itemsUnlockedLabel =Text("10/64", position=(-0.15,-.34), background=True, visible=False, font="assets/DTM-Sans.otf"),
@@ -180,8 +180,12 @@ class Inventory(Entity):
                                 self.append("iron",combination = icon.name+"+"+c.name)
                             if c.name == "basalt":
                                 self.append("amber",combination = icon.name+"+"+c.name)
-                            if c.name == "sandstone":
+                            if c.name == "clay":
                                 self.append("amethyst",combination = icon.name+"+"+c.name)
+                            if c.name == "sandstone":
+                                self.append("zircon",combination = icon.name+"+"+c.name)
+                            if c.name == "marble":
+                                self.append("quartz",combination = icon.name+"+"+c.name)
                         
                     elif type == "magic":
                         icon.position = icon.org_pos

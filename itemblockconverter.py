@@ -35,6 +35,12 @@ def convert(name, position):
         return blocks.amber(position)
     if name == "amethyst":
         return blocks.amethyst(position)
+    if name == "quartz":
+        return blocks.quartz(position)
+    if name == "zircon":
+        return blocks.zircon(position)
+    if name == "ruby":
+        return blocks.ruby(position)
     if name == "obsidian":
         return blocks.obsidian(position)
     if name == "obsidian-brick":
