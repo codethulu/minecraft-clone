@@ -1,4 +1,4 @@
-# minecraft-clone
+# ursina elements
 
 A very simple minecraft clone written in python. Blocks can be destroyed and placed down, and the inventory can be accessed using [ESC]. New blocks may be obtained through a system inspired by little alchemy: dragging tools or wands onto blocks may create new blocks to work with. 
 
