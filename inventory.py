@@ -29,7 +29,7 @@ class Inventory(Entity):
             visible=False,
             lifeMagic=False,
             selectedItem=None,
-            unlocks=[[16, "life","magic"],[25, "concrete","item"], [28, "marble","item"], [32, "basalt","item"],[48, "ruby","item"],[63, "life","item"]],
+            unlocks=[[16, "life","magic"],[25, "limestone","item"], [30, "marble","item"], [36, "basalt","item"],[48, "ruby","item"],[60, "ice","item"]],
             inventoryLabel =Text("Inventory", position=(-0.73,.47), background=True, visible=False, font="assets/DTM-Sans.otf"),
             nextUnlockLabel =Text("0 Till Next Unlock:", position=(-0.73,-.34), background=True, visible=False, font="assets/DTM-Sans.otf"),
             itemsUnlockedLabel =Text("10/64", position=(-0.15,-.34), background=True, visible=False, font="assets/DTM-Sans.otf"),
@@ -57,13 +57,18 @@ class Inventory(Entity):
         self.visible = not self.visible
         window.exit_button.visible = self.visible
         mouse.locked = not self.visible
-        self.itemsUnlockedLabel.text = str(len(self.children))+"/64"
+        self.itemsUnlockedLabel.text = str(len(self.children)-1)+"/64"
         self.itemsUnlockedLabel.visible= self.visible
         self.inventoryLabel.visible= self.visible
-        self.nextUnlockLabel.visible= self.visible
-        self.nextUnlockLabel.text = str(self.unlocks[0][0] - len(self.children))+" Till Next Unlock:"
-        self.nextUnlockIcon.visible= self.visible
-        self.nextUnlockIcon.texture = texture='assets/items/'+self.unlocks[0][1]
+        try:
+            self.nextUnlockLabel.visible= self.visible
+            self.nextUnlockLabel.text = str(self.unlocks[0][0] - len(self.children))+" Till Next Unlock:"
+            self.nextUnlockIcon.visible= self.visible
+            self.nextUnlockIcon.texture = texture='assets/items/'+self.unlocks[0][1]
+            
+        except:
+            self.nextUnlockLabel.visible = False
+            self.nextUnlockIcon.visible = False
         time.sleep(0.1)
 
     def find_free_spot(self):
@@ -82,7 +87,7 @@ class Inventory(Entity):
             if i.name == item:
                 return
 
-        if len(self.children) >= 8*8:
+        if (len(self.children)-1) >= 8*8:
             error_message = Text('<red>Inventory is full!',
                                  origin=(0, -1.5), x=-.5, scale=2)
             destroy(error_message, delay=1)
@@ -151,14 +156,20 @@ class Inventory(Entity):
                                 self.append("terracotta-tiles",combination = icon.name+"+"+c.name)
                             if c.name == "basalt":
                                 self.append("basalt-tiles",combination = icon.name+"+"+c.name)
+                            if c.name == "limestone":
+                                self.append("limestone-tiles",combination = icon.name+"+"+c.name)
                         if icon.name == "hammer":
                             if c.name == "stone":
                                 self.append("gravel",combination = icon.name+"+"+c.name)
                             if c.name == "sand":
                                 self.append("sandstone",combination = icon.name+"+"+c.name)
+                            if c.name == "limestone":
+                                self.append("chalk",combination = icon.name+"+"+c.name)
                         if icon.name == "saw":
                             if c.name == "log":
                                 self.append("wood",combination = icon.name+"+"+c.name)
+                            if c.name == "bamboo":
+                                self.append("tatami",combination = icon.name+"+"+c.name)
                             if c.name == "stone":
                                 self.append("stone-brick",combination = icon.name+"+"+c.name)
                             if c.name == "obsidian":
@@ -173,11 +184,21 @@ class Inventory(Entity):
                                 self.append("marble-brick",combination = icon.name+"+"+c.name)
                             if c.name == "basalt":
                                 self.append("basalt-brick",combination = icon.name+"+"+c.name)
+                            if c.name == "limestone":
+                                self.append("limestone-brick",combination = icon.name+"+"+c.name)
                             if c.name == "iron":
                                 self.append("iron-plating",combination = icon.name+"+"+c.name)
+                            if c.name == "slate":
+                                self.append("slate-slats",combination = icon.name+"+"+c.name)
+                            if c.name == "chalk":
+                                self.append("chalk-brick",combination = icon.name+"+"+c.name)
                         if icon.name == "pickaxe":
                             if c.name == "stone":
                                 self.append("iron",combination = icon.name+"+"+c.name)
+                            if c.name == "gravel":
+                                self.append("slate",combination = icon.name+"+"+c.name)
+                            if c.name == "limestone":
+                                self.append("copper",combination = icon.name+"+"+c.name)
                             if c.name == "basalt":
                                 self.append("amber",combination = icon.name+"+"+c.name)
                             if c.name == "clay":
@@ -211,18 +232,30 @@ class Inventory(Entity):
                                 self.append("obsidian",combination = icon.name+"+"+c.name)
                             if c.name == "fire":
                                 self.append("special", type="magic",combination = icon.name+"+"+c.name)
+                            if c.name == "limestone":
+                                self.append("concrete",combination = icon.name+"+"+c.name)
+                            if c.name == "copper":
+                                self.append("copper-oxide",combination = icon.name+"+"+c.name)
                         if icon.name == "life":
                             if c.name == "dirt":
                                 self.append("grass",combination = icon.name+"+"+c.name)
+                            if c.name == "mud":
+                                self.append("jungle-grass",combination = icon.name+"+"+c.name)
                             if c.name == "log":
                                 self.append("leaves",combination = icon.name+"+"+c.name)
                             if c.name == "stone":
                                 self.append("mossy-stone",combination = icon.name+"+"+c.name)
                             if c.name == "stone-brick":
                                 self.append("mossy-stone-brick",combination = icon.name+"+"+c.name)
+                            if c.name == "grass":
+                                self.append("log",combination = icon.name+"+"+c.name)
+                            if c.name == "jungle-grass":
+                                self.append("bamboo",combination = icon.name+"+"+c.name)
                         if icon.name == "special":
                             if c.name == "grass":
                                 self.append("meadow",combination = icon.name+"+"+c.name)
+                            if c.name == "glass":
+                                self.append("stained-glass",combination = icon.name+"+"+c.name)
 
                     else:
                         c.position = icon.org_pos
@@ -231,12 +264,14 @@ class Inventory(Entity):
         icon.drag = drag
         icon.drop = drop
 
-        
-
-        if len(self.children) == self.unlocks[0][0]:
-            self.append(self.unlocks[0][1], type=self.unlocks[0][2])
-            self.unlocks.pop(0)
-        
-        self.nextUnlockLabel.text = str(self.unlocks[0][0] - len(self.children))+" Till Next Unlock:"
-        self.nextUnlockIcon.texture = texture='assets/items/'+self.unlocks[0][1]
-        self.itemsUnlockedLabel.text = str(len(self.children))+"/64"
+        try:
+            if len(self.children) == self.unlocks[0][0]:
+                self.append(self.unlocks[0][1], type=self.unlocks[0][2])
+                self.unlocks.pop(0)
+            
+            self.nextUnlockLabel.text = str(self.unlocks[0][0] - len(self.children))+" Till Next Unlock:"
+            self.nextUnlockIcon.texture = texture='assets/items/'+self.unlocks[0][1]
+            self.itemsUnlockedLabel.text = str(len(self.children)-1)+"/64"
+        except:
+            self.nextUnlockLabel.visible = False
+            self.nextUnlockIcon.visible = False

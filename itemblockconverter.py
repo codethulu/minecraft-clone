@@ -7,6 +7,12 @@ def convert(name, position):
         return blocks.grass(position, 0)
     if name == "meadow":
         return blocks.grass(position, random.randint(1, 2))
+    if name == "jungle-grass":
+        return blocks.grass(position, 7)
+    if name == "bamboo":
+        return blocks.bamboo(position, random.randint(0, 8))
+    if name == "tatami":
+        return blocks.tatami(position)
     if name == "dirt":
         return blocks.dirt(position, random.randint(0, 3))
     if name == "mud":
@@ -23,6 +29,8 @@ def convert(name, position):
         return blocks.ash(position)
     if name == "glass":
         return blocks.glass(position)
+    if name == "stained-glass":
+        return blocks.stainedGlass(position)
     if name == "sand":
         return blocks.sand(position)
     if name == "clay":
@@ -41,12 +49,18 @@ def convert(name, position):
         return blocks.zircon(position)
     if name == "ruby":
         return blocks.ruby(position)
+    if name == "ice":
+        return blocks.ice(position)
     if name == "obsidian":
         return blocks.obsidian(position)
     if name == "obsidian-brick":
         return blocks.obsidianBrick(position,random.randint(0,3))
     if name == "gravel":
         return blocks.gravel(position)
+    if name == "slate":
+        return blocks.slate(position)
+    if name == "slate-slats":
+        return blocks.slateSlats(position)
     if name == "stone-brick":
         return blocks.stoneBrick(position,0)
     if name == "mossy-stone":
@@ -79,6 +93,16 @@ def convert(name, position):
         return blocks.basaltBrick(position)
     if name == "basalt-tiles":
         return blocks.basaltTiles(position)
+    if name == "limestone":
+        return blocks.limestone(position)
+    if name == "limestone-brick":
+        return blocks.limestoneBrick(position)
+    if name == "limestone-tiles":
+        return blocks.limestoneTiles(position)
+    if name == "chalk":
+        return blocks.chalk(position)
+    if name == "chalk-brick":
+        return blocks.chalkBrick(position)
     if name == "terracotta":
         return blocks.terracotta(position)
     if name == "brick":
@@ -93,5 +117,9 @@ def convert(name, position):
         return blocks.iron(position)
     if name == "iron-plating":
         return blocks.ironPlating(position, random.randint(0, 4))
+    if name == "copper":
+        return blocks.copper(position)
+    if name == "copper-oxide":
+        return blocks.copperOxide(position)
     if name == "water":
         return blocks.water(position)

@@ -205,6 +205,25 @@ class ruby(Block):
             self.texture = load_texture(defaultpath + self.name + '-' + str(self.var))
         else:
             self.animationConstant-=1
+
+class ice(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.var = 0
+        self.name = "ice"
+        self.texture = load_texture(defaultpath + self.name + '-' + str(self.var))
+        self.hardness = 1
+        self.animationConstant = 1700
+    def update(self):
+        if self.animationConstant==0:
+            self.animationConstant=5
+            self.var+=1
+            if self.var>7:
+                self.var = 0
+                self.animationConstant=1500 + random.randint(1,5) * 100
+            self.texture = load_texture(defaultpath + self.name + '-' + str(self.var))
+        else:
+            self.animationConstant-=1
 class obsidian(Block):
     def __init__(self, pos):
         super().__init__(pos)
@@ -221,6 +240,20 @@ class gravel(Block):
     def __init__(self, pos):
         super().__init__(pos)
         self.name = "gravel"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+class slate(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "slate"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+class slateSlats(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "slate-slats"
         self.texture = load_texture(defaultpath + self.name)
         self.hardness = 1
 class stoneBrick(Block):
@@ -354,12 +387,63 @@ class basaltTiles(Block):
         self.name = "basalt-tiles"
         self.texture = load_texture(defaultpath + self.name)
         self.hardness = 1
+        
+
+class limestone(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "limestone"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class limestoneBrick(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "limestone-brick"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+
+class limestoneTiles(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "limestone-tiles"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+class chalk(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "chalk"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
+
+class chalkBrick(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "chalk-brick"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
 
 class log(Block):
     def __init__(self, pos,var):
         super().__init__(pos)
         self.name = "log"
         self.texture = load_texture(defaultpath + self.name + '-' + str(var))
+        self.hardness = 1
+class bamboo(Block):
+    def __init__(self, pos,var):
+        super().__init__(pos)
+        self.name = "bamboo"
+        self.texture = load_texture(defaultpath + self.name + '-' + str(var))
+        self.hardness = 1
+
+class tatami(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "tatami"
+        self.texture = load_texture(defaultpath + self.name)
         self.hardness = 1
 
 class leaves(Block):
@@ -394,14 +478,31 @@ class glass(Block):
         self.name = "glass"
         self.texture = load_texture(defaultpath + self.name)
         self.hardness = 1
-
+class stainedGlass(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "stained-glass"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
 
 class iron(Block):
     def __init__(self, pos):
         super().__init__(pos)
+        self.var = 0
         self.name = "iron"
-        self.texture = load_texture(defaultpath + self.name)
+        self.texture = load_texture(defaultpath + self.name + '-' + str(self.var))
         self.hardness = 1
+        self.animationConstant = 1400
+    def update(self):
+        if self.animationConstant==0:
+            self.animationConstant=5
+            self.var+=1
+            if self.var>8:
+                self.var = 0
+                self.animationConstant=1200 + random.randint(1,5) * 100
+            self.texture = load_texture(defaultpath + self.name + '-' + str(self.var))
+        else:
+            self.animationConstant-=1
 
 class ironPlating(Block):
     def __init__(self, pos,var):
@@ -410,6 +511,31 @@ class ironPlating(Block):
         self.texture = load_texture(defaultpath + self.name + '-' + str(var))
         self.hardness = 1
 
+class copper(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.var = 0
+        self.name = "copper"
+        self.texture = load_texture(defaultpath + self.name + '-' + str(self.var))
+        self.hardness = 1
+        self.animationConstant = 1400
+    def update(self):
+        if self.animationConstant==0:
+            self.animationConstant=5
+            self.var+=1
+            if self.var>8:
+                self.var = 0
+                self.animationConstant=1200 + random.randint(1,5) * 100
+            self.texture = load_texture(defaultpath + self.name + '-' + str(self.var))
+        else:
+            self.animationConstant-=1
+
+class copperOxide(Block):
+    def __init__(self, pos):
+        super().__init__(pos)
+        self.name = "copper-oxide"
+        self.texture = load_texture(defaultpath + self.name)
+        self.hardness = 1
 class water(Block):
     def __init__(self, pos):
         super().__init__(pos)
